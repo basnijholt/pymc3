@@ -189,3 +189,8 @@ class TestSMCABC(SeededTest):
         assert expected == self.s._repr_latex_()
         assert self.s._repr_latex_() == self.s.__latex__()
         assert self.SMABC_test.model._repr_latex_() == self.SMABC_test.model.__latex__()
+
+    def test_name_is_string_type(self):
+        with self.SMABC_potential:
+            trace = pm.sample_smc(draws=10, kernel="ABC")
+            assert isinstance(trace._straces[0].name, str)
